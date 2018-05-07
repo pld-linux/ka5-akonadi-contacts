@@ -1,0 +1,100 @@
+%define		kdeappsver	18.04.0
+%define		qtver		5.3.2
+%define		kaname		akonadi-contacts
+Summary:	Akonadi Contacts
+Name:		ka5-%{kaname}
+Version:	18.04.0
+Release:	1
+License:	GPL v2+/LGPL v2.1+
+Group:		X11/Libraries
+Source0:	http://download.kde.org/stable/applications/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
+# Source0-md5:	f85d44e7d05919303dfc1c960b9fb666
+URL:		http://www.kde.org/
+BuildRequires:	Qt5Core-devel >= %{qtver}
+#BuildRequires:	Qt5WebEngine-devel >= %{qtver}
+BuildRequires:	cmake >= 2.8.12
+BuildRequires:	ka5-akonadi-mime-devel >= %{kdeappsver}
+BuildRequires:	kf5-extra-cmake-modules >= 1.4.0
+BuildRequires:	kf5-prison-devel >= 5.44.0
+BuildRequires:	qt5-build >= %{qtver}
+BuildRequires:	rpmbuild(macros) >= 1.164
+BuildRequires:	shared-mime-info
+BuildRequires:	tar >= 1:1.22
+BuildRequires:	xz
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%description
+Akonadi Contacts is a library that effectively bridges the
+type-agnostic API of the Akonadi client libraries and the
+domain-specific KContacts library. It provides jobs, models and other
+helpers to make working with contacts and addressbooks through Akonadi
+easier.
+
+%package devel
+Summary:	Header files for %{kaname} development
+Summary(pl.UTF-8):	Pliki nagłówkowe dla programistów używających %{kpname}
+Group:		X11/Development/Libraries
+Requires:	%{name} = %{version}-%{release}
+
+%description devel
+Header files for %{kaname} development.
+
+%description devel -l pl.UTF-8
+Pliki nagłówkowe dla programistów używających %{kaname}.
+
+%prep
+%setup -q -n %{kaname}-%{version}
+
+%build
+install -d build
+cd build
+%cmake \
+	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
+	..
+%{__make}
+
+%install
+rm -rf $RPM_BUILD_ROOT
+%{__make} -C build install \
+	DESTDIR=$RPM_BUILD_ROOT
+
+%find_lang %{kaname} --all-name --with-kde
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%post	-p /sbin/ldconfig
+%postun	-p /sbin/ldconfig
+
+%files -f %{kaname}.lang
+%defattr(644,root,root,755)
+/etc/xdg/akonadi-contacts.categories
+/etc/xdg/akonadi-contacts.renamecategories
+/etc/xdg/contact-editor.categories
+%ghost %{_libdir}/libKF5AkonadiContact.so.5
+%{_libdir}/libKF5AkonadiContact.so.5.*.*
+%ghost %{_libdir}/libKF5ContactEditor.so.5
+%{_libdir}/libKF5ContactEditor.so.5.*.*
+%{_libdir}/qt5/plugins/akonadi/contacts
+%{_libdir}/qt5/plugins/akonadi_serializer_addressee.so
+%{_libdir}/qt5/plugins/akonadi_serializer_contactgroup.so
+%{_libdir}/qt5/plugins/kcm_akonadicontact_actions.so
+%{_datadir}/akonadi/plugins/serializer/akonadi_serializer_addressee.desktop
+%{_datadir}/akonadi/plugins/serializer/akonadi_serializer_contactgroup.desktop
+%{_datadir}/kf5/akonadi/contact
+%{_datadir}/kservices5/akonadi
+%{_datadir}/kservices5/akonadicontact_actions.desktop
+%{_datadir}/kservicetypes5/kaddressbookimprotocol.desktop
+
+%files devel
+%defattr(644,root,root,755)
+%{_includedir}/KF5/Akonadi/Contact
+%{_includedir}/KF5/ContactEditor
+%{_includedir}/KF5/akonadi/contact
+%{_includedir}/KF5/contacteditor
+%{_libdir}/cmake/KF5AkonadiContact
+%{_libdir}/cmake/KF5ContactEditor
+%{_libdir}/libKF5AkonadiContact.so
+%{_libdir}/libKF5ContactEditor.so
+%{_libdir}/qt5/mkspecs/modules/qt_AkonadiContact.pri
+%{_libdir}/qt5/mkspecs/modules/qt_ContactEditor.pri
