@@ -15,6 +15,7 @@ BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	cmake >= 2.8.12
 BuildRequires:	ka5-akonadi-mime-devel >= %{kdeappsver}
 BuildRequires:	kf5-extra-cmake-modules >= 1.4.0
+BuildRequires:	ka5-kcontacts-devel
 BuildRequires:	kf5-prison-devel >= 5.44.0
 BuildRequires:	qt5-build >= %{qtver}
 BuildRequires:	rpmbuild(macros) >= 1.164
