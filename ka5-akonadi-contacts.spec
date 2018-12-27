@@ -1,25 +1,35 @@
-%define		kdeappsver	18.04.3
-%define		qtver		5.3.2
+%define		kdeappsver	18.12.0
+%define		qtver		5.9.0
 %define		kaname		akonadi-contacts
 Summary:	Akonadi Contacts
 Name:		ka5-%{kaname}
-Version:	18.04.3
+Version:	18.12.0
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/applications/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	076e2c2749bd06fb6f94297eedd3f07b
+# Source0-md5:	07a9ec821e760c666915b797488d4fa2
 URL:		http://www.kde.org/
+BuildRequires:	Qt5-devel >= 5.9.0
 BuildRequires:	Qt5Core-devel >= %{qtver}
+BuildRequires:	Qt5Gui-devel >= 5.11.1
+BuildRequires:	Qt5Test-devel
 #BuildRequires:	Qt5WebEngine-devel >= %{qtver}
+BuildRequires:	Qt5Widgets-devel
 BuildRequires:	cmake >= 2.8.12
-BuildRequires:	ka5-akonadi-mime-devel >= %{kdeappsver}
-BuildRequires:	kf5-extra-cmake-modules >= 1.4.0
-BuildRequires:	ka5-kcontacts-devel
-BuildRequires:	kf5-prison-devel >= 5.44.0
-BuildRequires:	qt5-build >= %{qtver}
-BuildRequires:	rpmbuild(macros) >= 1.164
-BuildRequires:	shared-mime-info
+BuildRequires:	gettext-devel
+BuildRequires:	ka5-akonadi-devel >= 18.12.0
+BuildRequires:	ka5-contacts-devel >= 18.12.0
+BuildRequires:	ka5-kmime-devel >= 18.12.0
+BuildRequires:	kf5-extra-cmake-modules >= 5.51.0
+BuildRequires:	kf5-kcodecs-devel >= 5.51.0
+BuildRequires:	kf5-kcompletion-devel >= 5.51.0
+BuildRequires:	kf5-kdbusaddons-devel >= 5.51.0
+BuildRequires:	kf5-ki18n-devel >= 5.51.0
+BuildRequires:	kf5-kiconthemes-devel >= 5.51.0
+BuildRequires:	kf5-kio-devel >= 5.51.0
+BuildRequires:	kf5-ktextwidgets-devel >= 5.51.0
+BuildRequires:	kf5-prison-devel >= 5.51.0
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -71,7 +81,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 /etc/xdg/akonadi-contacts.categories
 /etc/xdg/akonadi-contacts.renamecategories
-/etc/xdg/contact-editor.categories
+#/etc/xdg/contact-editor.categories
 %ghost %{_libdir}/libKF5AkonadiContact.so.5
 %{_libdir}/libKF5AkonadiContact.so.5.*.*
 %ghost %{_libdir}/libKF5ContactEditor.so.5
