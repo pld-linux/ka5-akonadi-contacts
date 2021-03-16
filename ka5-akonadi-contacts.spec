@@ -1,14 +1,14 @@
-%define		kdeappsver	19.04.1
+%define		kdeappsver	20.12.3
 %define		qtver		5.9.0
 %define		kaname		akonadi-contacts
 Summary:	Akonadi Contacts
 Name:		ka5-%{kaname}
-Version:	19.04.1
+Version:	20.12.3
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
-Source0:	http://download.kde.org/stable/applications/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	71c513ff87595e8bcb7580105f48ae96
+Source0:	http://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
+# Source0-md5:	3ed5df5f45dad84eb4db5a80b11771c7
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	Qt5Gui-devel >= 5.11.1
@@ -17,11 +17,13 @@ BuildRequires:	Qt5Widgets-devel
 BuildRequires:	cmake >= 2.8.12
 BuildRequires:	gettext-devel
 BuildRequires:	ka5-akonadi-devel >= %{kdeappsver}
-BuildRequires:	ka5-kcontacts-devel >= %{kdeappsver}
+BuildRequires:	ka5-grantleetheme-devel >= %{kdeappsver}
 BuildRequires:	ka5-kmime-devel >= %{kdeappsver}
+BuildRequires:	ka5-libkleo-devel >= %{kdeappsver}
 BuildRequires:	kf5-extra-cmake-modules >= 5.51.0
 BuildRequires:	kf5-kcodecs-devel >= 5.51.0
 BuildRequires:	kf5-kcompletion-devel >= 5.51.0
+BuildRequires:	kf5-kcontacts-devel >= 5.65.0
 BuildRequires:	kf5-kdbusaddons-devel >= 5.51.0
 BuildRequires:	kf5-ki18n-devel >= 5.51.0
 BuildRequires:	kf5-kiconthemes-devel >= 5.51.0
@@ -78,9 +80,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{kaname}.lang
 %defattr(644,root,root,755)
-/etc/xdg/akonadi-contacts.categories
-/etc/xdg/akonadi-contacts.renamecategories
-#/etc/xdg/contact-editor.categories
 %ghost %{_libdir}/libKF5AkonadiContact.so.5
 %{_libdir}/libKF5AkonadiContact.so.5.*.*
 %ghost %{_libdir}/libKF5ContactEditor.so.5
@@ -92,9 +91,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/akonadi/plugins/serializer/akonadi_serializer_addressee.desktop
 %{_datadir}/akonadi/plugins/serializer/akonadi_serializer_contactgroup.desktop
 %{_datadir}/kf5/akonadi/contact
-%{_datadir}/kservices5/akonadi
 %{_datadir}/kservices5/akonadicontact_actions.desktop
-%{_datadir}/kservicetypes5/kaddressbookimprotocol.desktop
+%{_datadir}/qlogging-categories5/akonadi-contacts.categories
+%{_datadir}/qlogging-categories5/akonadi-contacts.renamecategories
 
 %files devel
 %defattr(644,root,root,755)
