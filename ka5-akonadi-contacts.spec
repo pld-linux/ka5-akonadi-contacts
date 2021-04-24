@@ -1,14 +1,14 @@
-%define		kdeappsver	20.12.3
+%define		kdeappsver	21.04.0
 %define		qtver		5.9.0
 %define		kaname		akonadi-contacts
 Summary:	Akonadi Contacts
 Name:		ka5-%{kaname}
-Version:	20.12.3
+Version:	21.04.0
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	3ed5df5f45dad84eb4db5a80b11771c7
+# Source0-md5:	0d4d8d37edef71c3120565cbb4e4571c
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	Qt5Gui-devel >= 5.11.1
