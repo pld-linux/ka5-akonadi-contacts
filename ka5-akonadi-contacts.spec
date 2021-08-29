@@ -4,7 +4,7 @@
 Summary:	Akonadi Contacts
 Name:		ka5-%{kaname}
 Version:	21.08.0
-Release:	2
+Release:	3
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
@@ -87,6 +87,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/qt5/plugins/akonadi/contacts
 %{_libdir}/qt5/plugins/akonadi_serializer_addressee.so
 %{_libdir}/qt5/plugins/akonadi_serializer_contactgroup.so
+%dir %{_libdir}/qt5/plugins/pim/kcms/kaddressbook
 %{_libdir}/qt5/plugins/pim/kcms/kaddressbook/kcm_akonadicontact_actions.so
 %{_datadir}/akonadi/plugins/serializer/akonadi_serializer_addressee.desktop
 %{_datadir}/akonadi/plugins/serializer/akonadi_serializer_contactgroup.desktop
