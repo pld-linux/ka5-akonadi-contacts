@@ -4,7 +4,7 @@
 Summary:	Akonadi Contacts
 Name:		ka5-%{kaname}
 Version:	21.12.1
-Release:	1
+Release:	2
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
@@ -21,6 +21,7 @@ BuildRequires:	ka5-grantleetheme-devel >= %{kdeappsver}
 BuildRequires:	ka5-kmime-devel >= %{kdeappsver}
 BuildRequires:	ka5-libkleo-devel >= %{kdeappsver}
 BuildRequires:	kf5-extra-cmake-modules >= 5.51.0
+BuildRequires:	kf5-kcmutils-devel >= 5.87.0
 BuildRequires:	kf5-kcodecs-devel >= 5.51.0
 BuildRequires:	kf5-kcompletion-devel >= 5.51.0
 BuildRequires:	kf5-kcontacts-devel >= 5.65.0
