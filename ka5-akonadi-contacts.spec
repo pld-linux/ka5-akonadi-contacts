@@ -29,6 +29,7 @@ BuildRequires:	kf5-kdbusaddons-devel >= 5.51.0
 BuildRequires:	kf5-ki18n-devel >= 5.51.0
 BuildRequires:	kf5-kiconthemes-devel >= 5.51.0
 BuildRequires:	kf5-kio-devel >= 5.51.0
+BuildRequires:	kf5-kitemmodels-devel >= 5.87.0
 BuildRequires:	kf5-ktextwidgets-devel >= 5.51.0
 BuildRequires:	kf5-prison-devel >= 5.51.0
 BuildRequires:	ninja
