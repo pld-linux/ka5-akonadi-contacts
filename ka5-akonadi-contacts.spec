@@ -1,17 +1,17 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeappsver	21.12.3
+%define		kdeappsver	22.04.0
 %define		qtver		5.9.0
 %define		kaname		akonadi-contacts
 Summary:	Akonadi Contacts
 Name:		ka5-%{kaname}
-Version:	21.12.3
-Release:	2
+Version:	22.04.0
+Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	http://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	07e045b2084486dafbadd442dfb5e47a
+# Source0-md5:	fe5060b320ba66013a9655dbee70c83f
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	Qt5Gui-devel >= 5.11.1
@@ -112,13 +112,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%{_includedir}/KF5/Akonadi/Contact
-%{_includedir}/KF5/ContactEditor
-%{_includedir}/KF5/akonadi/contact
-%{_includedir}/KF5/contacteditor
 %{_libdir}/cmake/KF5AkonadiContact
 %{_libdir}/cmake/KF5ContactEditor
 %{_libdir}/libKF5AkonadiContact.so
 %{_libdir}/libKF5ContactEditor.so
 %{_libdir}/qt5/mkspecs/modules/qt_AkonadiContact.pri
 %{_libdir}/qt5/mkspecs/modules/qt_ContactEditor.pri
+%{_includedir}/KF5/AkonadiContact
+%{_includedir}/KF5/AkonadiContactEditor
