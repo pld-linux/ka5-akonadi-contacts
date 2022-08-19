@@ -1,17 +1,17 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeappsver	22.04.3
+%define		kdeappsver	22.08.0
 %define		qtver		5.15.2
 %define		kaname		akonadi-contacts
 Summary:	Akonadi Contacts
 Name:		ka5-%{kaname}
-Version:	22.04.3
+Version:	22.08.0
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	9c9668002d8f436efd7b0a0cdb0f242f
+# Source0-md5:	db2bd6382e9c93010f00e312bad1bd21
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	Qt5Gui-devel >= 5.11.1
@@ -96,19 +96,19 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libKF5AkonadiContact.so.5.*.*
 %ghost %{_libdir}/libKF5ContactEditor.so.5
 %{_libdir}/libKF5ContactEditor.so.5.*.*
-%{_libdir}/qt5/plugins/akonadi/contacts
 %{_libdir}/qt5/plugins/akonadi_serializer_addressee.so
 %{_libdir}/qt5/plugins/akonadi_serializer_contactgroup.so
-%dir %{_libdir}/qt5/plugins/pim
-%dir %{_libdir}/qt5/plugins/pim/kcms
-%dir %{_libdir}/qt5/plugins/pim/kcms/kaddressbook
-%{_libdir}/qt5/plugins/pim/kcms/kaddressbook/kcm_akonadicontact_actions.so
 %{_datadir}/akonadi/plugins/serializer/akonadi_serializer_addressee.desktop
 %{_datadir}/akonadi/plugins/serializer/akonadi_serializer_contactgroup.desktop
 %{_datadir}/kf5/akonadi/contact
-%{_datadir}/kservices5/akonadicontact_actions.desktop
 %{_datadir}/qlogging-categories5/akonadi-contacts.categories
 %{_datadir}/qlogging-categories5/akonadi-contacts.renamecategories
+%dir %{_libdir}/qt5/plugins/pim5/akonadi/contacts
+%dir %{_libdir}/qt5/plugins/pim5/akonadi/contacts/plugins
+%{_libdir}/qt5/plugins/pim5/akonadi/contacts/plugins/categorieseditwidgetplugin.so
+%dir %{_libdir}/qt5/plugins/pim5/kcms
+%dir %{_libdir}/qt5/plugins/pim5/kcms/kaddressbook
+%{_libdir}/qt5/plugins/pim5/kcms/kaddressbook/kcm_akonadicontact_actions.so
 
 %files devel
 %defattr(644,root,root,755)
