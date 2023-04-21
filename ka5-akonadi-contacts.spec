@@ -1,17 +1,17 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeappsver	22.12.3
+%define		kdeappsver	23.04.0
 %define		qtver		5.15.2
 %define		kaname		akonadi-contacts
 Summary:	Akonadi Contacts
 Name:		ka5-%{kaname}
-Version:	22.12.3
-Release:	3
+Version:	23.04.0
+Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	7033aaf13c2834a5e550f6edb3110ddd
+# Source0-md5:	d4352b47b48aaffd2bad9847f2bf5046
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	Qt5Gui-devel >= 5.11.1
@@ -92,12 +92,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{kaname}.lang
 %defattr(644,root,root,755)
-%ghost %{_libdir}/libKF5AkonadiContact.so.5
-%{_libdir}/libKF5AkonadiContact.so.5.*.*
-%ghost %{_libdir}/libKF5ContactEditor.so.5
-%{_libdir}/libKF5ContactEditor.so.5.*.*
-%{_libdir}/qt5/plugins/akonadi_serializer_addressee.so
-%{_libdir}/qt5/plugins/akonadi_serializer_contactgroup.so
+%attr(755,root,root) %{_libdir}/qt5/plugins/akonadi_serializer_addressee.so
+%attr(755,root,root) %{_libdir}/qt5/plugins/akonadi_serializer_contactgroup.so
 %{_datadir}/akonadi/plugins/serializer/akonadi_serializer_addressee.desktop
 %{_datadir}/akonadi/plugins/serializer/akonadi_serializer_contactgroup.desktop
 %{_datadir}/kf5/akonadi/contact
@@ -105,18 +101,24 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/qlogging-categories5/akonadi-contacts.renamecategories
 %dir %{_libdir}/qt5/plugins/pim5/akonadi/contacts
 %dir %{_libdir}/qt5/plugins/pim5/akonadi/contacts/plugins
-%{_libdir}/qt5/plugins/pim5/akonadi/contacts/plugins/categorieseditwidgetplugin.so
+%attr(755,root,root) %{_libdir}/qt5/plugins/pim5/akonadi/contacts/plugins/categorieseditwidgetplugin.so
 %dir %{_libdir}/qt5/plugins/pim5/kcms
 %dir %{_libdir}/qt5/plugins/pim5/kcms/kaddressbook
-%{_libdir}/qt5/plugins/pim5/kcms/kaddressbook/kcm_akonadicontact_actions.so
+%attr(755,root,root) %{_libdir}/qt5/plugins/pim5/kcms/kaddressbook/kcm_akonadicontact_actions.so
+%ghost %{_libdir}/libKPim5AkonadiContact.so.5
+%attr(755,root,root) %{_libdir}/libKPim5AkonadiContact.so.*.*.*
+%ghost %{_libdir}/libKPim5ContactEditor.so.5
+%attr(755,root,root) %{_libdir}/libKPim5ContactEditor.so.*.*.*
 
 %files devel
 %defattr(644,root,root,755)
-%{_libdir}/cmake/KF5AkonadiContact
-%{_libdir}/cmake/KF5ContactEditor
-%{_libdir}/libKF5AkonadiContact.so
-%{_libdir}/libKF5ContactEditor.so
 %{_libdir}/qt5/mkspecs/modules/qt_AkonadiContact.pri
 %{_libdir}/qt5/mkspecs/modules/qt_ContactEditor.pri
-%{_includedir}/KF5/AkonadiContact
-%{_includedir}/KF5/AkonadiContactEditor
+%{_includedir}/KPim5/AkonadiContact
+%{_includedir}/KPim5/AkonadiContactEditor
+%{_libdir}/cmake/KF5AkonadiContact
+%{_libdir}/cmake/KF5AkonadiContactEditor
+%{_libdir}/cmake/KPim5AkonadiContact
+%{_libdir}/cmake/KPim5ContactEditor
+%{_libdir}/libKPim5AkonadiContact.so
+%{_libdir}/libKPim5ContactEditor.so
