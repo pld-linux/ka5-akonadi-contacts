@@ -1,23 +1,23 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeappsver	23.04.3
+%define		kdeappsver	23.08.0
 %define		qtver		5.15.2
 %define		kaname		akonadi-contacts
 Summary:	Akonadi Contacts
 Name:		ka5-%{kaname}
-Version:	23.04.3
+Version:	23.08.0
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	9f56f16846b9f04dd3e79fb760236f46
+# Source0-md5:	aff28243a1297f0bc2298a934d828dba
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	Qt5Gui-devel >= 5.11.1
 BuildRequires:	Qt5Test-devel
 BuildRequires:	Qt5Widgets-devel
-BuildRequires:	cmake >= 2.8.12
+BuildRequires:	cmake >= 3.20
 BuildRequires:	gettext-devel
 BuildRequires:	gpgme-qt5-devel
 BuildRequires:	ka5-akonadi-devel >= %{kdeappsver}
@@ -64,17 +64,15 @@ Pliki nagłówkowe dla programistów używających %{kaname}.
 %setup -q -n %{kaname}-%{version}
 
 %build
-install -d build
-cd build
-%cmake -G Ninja \
+%cmake -B build \
+	-G Ninja \
 	%{!?with_tests:-DBUILD_TESTING=OFF} \
 	-DHTML_INSTALL_DIR=%{_kdedocdir} \
-	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON \
-	..
-%ninja_build
+	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON
+%ninja_build -C build
 
 %if %{with tests}
-ctest
+ctest --test-dir build
 %endif
 
 
@@ -99,12 +97,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kf5/akonadi/contact
 %{_datadir}/qlogging-categories5/akonadi-contacts.categories
 %{_datadir}/qlogging-categories5/akonadi-contacts.renamecategories
-%dir %{_libdir}/qt5/plugins/pim5/akonadi/contacts
-%dir %{_libdir}/qt5/plugins/pim5/akonadi/contacts/plugins
-%attr(755,root,root) %{_libdir}/qt5/plugins/pim5/akonadi/contacts/plugins/categorieseditwidgetplugin.so
-%dir %{_libdir}/qt5/plugins/pim5/kcms
-%dir %{_libdir}/qt5/plugins/pim5/kcms/kaddressbook
-%attr(755,root,root) %{_libdir}/qt5/plugins/pim5/kcms/kaddressbook/kcm_akonadicontact_actions.so
 %ghost %{_libdir}/libKPim5AkonadiContact.so.5
 %attr(755,root,root) %{_libdir}/libKPim5AkonadiContact.so.*.*.*
 %ghost %{_libdir}/libKPim5ContactEditor.so.5
@@ -116,7 +108,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/qt5/mkspecs/modules/qt_ContactEditor.pri
 %{_includedir}/KPim5/AkonadiContact
 %{_includedir}/KPim5/AkonadiContactEditor
-%{_libdir}/cmake/KF5AkonadiContact
 %{_libdir}/cmake/KF5AkonadiContactEditor
 %{_libdir}/cmake/KPim5AkonadiContact
 %{_libdir}/cmake/KPim5ContactEditor
