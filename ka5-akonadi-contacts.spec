@@ -1,17 +1,17 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeappsver	23.08.4
+%define		kdeappsver	23.08.5
 %define		qtver		5.15.2
 %define		kaname		akonadi-contacts
 Summary:	Akonadi Contacts
 Name:		ka5-%{kaname}
-Version:	23.08.4
+Version:	23.08.5
 Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	663a86af3b4f7e3efb425f4b08e85e2c
+# Source0-md5:	e4b501e5a6fedcb972b3ff2c31e8577a
 URL:		http://www.kde.org/
 BuildRequires:	Qt5Core-devel >= %{qtver}
 BuildRequires:	Qt5Gui-devel >= 5.11.1
