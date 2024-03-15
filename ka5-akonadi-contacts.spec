@@ -1,41 +1,41 @@
 #
 # Conditional build:
 %bcond_with	tests		# build with tests
-%define		kdeappsver	24.01.95
+%define		kdeappsver	23.08.4
 %define		qtver		5.15.2
 %define		kaname		akonadi-contacts
 Summary:	Akonadi Contacts
 Name:		ka5-%{kaname}
-Version:	24.01.95
-Release:	0.1
+Version:	23.08.4
+Release:	1
 License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
-Source0:	https://download.kde.org/unstable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
-# Source0-md5:	f7bbc000b4ba41e33e2d99fbcbae0dcb
+Source0:	https://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
+# Source0-md5:	663a86af3b4f7e3efb425f4b08e85e2c
 URL:		http://www.kde.org/
-BuildRequires:	Qt6Core-devel >= %{qtver}
-BuildRequires:	Qt6Gui-devel >= 5.11.1
-BuildRequires:	Qt6Test-devel
-BuildRequires:	Qt6Widgets-devel
+BuildRequires:	Qt5Core-devel >= %{qtver}
+BuildRequires:	Qt5Gui-devel >= 5.11.1
+BuildRequires:	Qt5Test-devel
+BuildRequires:	Qt5Widgets-devel
 BuildRequires:	cmake >= 3.20
 BuildRequires:	gettext-devel
-BuildRequires:	gpgme-qt6-devel
+BuildRequires:	gpgme-qt5-devel
 BuildRequires:	ka5-akonadi-devel >= %{kdeappsver}
 BuildRequires:	ka5-grantleetheme-devel >= %{kdeappsver}
 BuildRequires:	ka5-kmime-devel >= %{kdeappsver}
 BuildRequires:	ka5-libkleo-devel >= %{kdeappsver}
-BuildRequires:	kf6-extra-cmake-modules >= 5.51.0
-BuildRequires:	kf6-kcmutils-devel >= 5.87.0
-BuildRequires:	kf6-kcodecs-devel >= 5.51.0
-BuildRequires:	kf6-kcompletion-devel >= 5.51.0
-BuildRequires:	kf6-kcontacts-devel >= 5.65.0
-BuildRequires:	kf6-kdbusaddons-devel >= 5.51.0
-BuildRequires:	kf6-ki18n-devel >= 5.51.0
-BuildRequires:	kf6-kiconthemes-devel >= 5.51.0
-BuildRequires:	kf6-kio-devel >= 5.51.0
-BuildRequires:	kf6-kitemmodels-devel >= 5.87.0
-BuildRequires:	kf6-ktextwidgets-devel >= 5.51.0
-BuildRequires:	kf6-prison-devel >= 5.51.0
+BuildRequires:	kf5-extra-cmake-modules >= 5.51.0
+BuildRequires:	kf5-kcmutils-devel >= 5.87.0
+BuildRequires:	kf5-kcodecs-devel >= 5.51.0
+BuildRequires:	kf5-kcompletion-devel >= 5.51.0
+BuildRequires:	kf5-kcontacts-devel >= 5.65.0
+BuildRequires:	kf5-kdbusaddons-devel >= 5.51.0
+BuildRequires:	kf5-ki18n-devel >= 5.51.0
+BuildRequires:	kf5-kiconthemes-devel >= 5.51.0
+BuildRequires:	kf5-kio-devel >= 5.51.0
+BuildRequires:	kf5-kitemmodels-devel >= 5.87.0
+BuildRequires:	kf5-ktextwidgets-devel >= 5.51.0
+BuildRequires:	kf5-prison-devel >= 5.51.0
 BuildRequires:	ninja
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	xz
@@ -90,24 +90,26 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{kaname}.lang
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/qt6/plugins/akonadi_serializer_addressee.so
-%attr(755,root,root) %{_libdir}/qt6/plugins/akonadi_serializer_contactgroup.so
+%attr(755,root,root) %{_libdir}/qt5/plugins/akonadi_serializer_addressee.so
+%attr(755,root,root) %{_libdir}/qt5/plugins/akonadi_serializer_contactgroup.so
 %{_datadir}/akonadi/plugins/serializer/akonadi_serializer_addressee.desktop
 %{_datadir}/akonadi/plugins/serializer/akonadi_serializer_contactgroup.desktop
-%attr(755,root,root) %{_libdir}/libKPim6AkonadiContactCore.so.*.*
-%ghost %{_libdir}/libKPim6AkonadiContactCore.so.6
-%attr(755,root,root) %{_libdir}/libKPim6AkonadiContactWidgets.so.*.*
-%ghost %{_libdir}/libKPim6AkonadiContactWidgets.so.6
-%{_datadir}/kf6/akonadi/contact/data/zone.tab
-%{_datadir}/kf6/akonadi/contact/pics/world.jpg
-%{_datadir}/qlogging-categories6/akonadi-contacts.categories
-%{_datadir}/qlogging-categories6/akonadi-contacts.renamecategories
+%{_datadir}/kf5/akonadi/contact
+%{_datadir}/qlogging-categories5/akonadi-contacts.categories
+%{_datadir}/qlogging-categories5/akonadi-contacts.renamecategories
+%ghost %{_libdir}/libKPim5AkonadiContact.so.5
+%attr(755,root,root) %{_libdir}/libKPim5AkonadiContact.so.*.*.*
+%ghost %{_libdir}/libKPim5ContactEditor.so.5
+%attr(755,root,root) %{_libdir}/libKPim5ContactEditor.so.*.*.*
 
 %files devel
 %defattr(644,root,root,755)
-%{_includedir}/KPim6/AkonadiContactCore
-%{_includedir}/KPim6/AkonadiContactWidgets
-%{_libdir}/cmake/KPim6AkonadiContactCore
-%{_libdir}/cmake/KPim6AkonadiContactWidgets
-%{_libdir}/libKPim6AkonadiContactCore.so
-%{_libdir}/libKPim6AkonadiContactWidgets.so
+%{_libdir}/qt5/mkspecs/modules/qt_AkonadiContact.pri
+%{_libdir}/qt5/mkspecs/modules/qt_ContactEditor.pri
+%{_includedir}/KPim5/AkonadiContact
+%{_includedir}/KPim5/AkonadiContactEditor
+%{_libdir}/cmake/KF5AkonadiContactEditor
+%{_libdir}/cmake/KPim5AkonadiContact
+%{_libdir}/cmake/KPim5ContactEditor
+%{_libdir}/libKPim5AkonadiContact.so
+%{_libdir}/libKPim5ContactEditor.so
