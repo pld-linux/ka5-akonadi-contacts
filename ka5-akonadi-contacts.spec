@@ -1,8 +1,9 @@
 #
 # Conditional build:
-%bcond_with	tests		# build with tests
+%bcond_with	tests		# test suite
+
 %define		kdeappsver	23.08.5
-%define		qtver		5.15.2
+%define		qt_ver		5.15.2
 %define		kaname		akonadi-contacts
 Summary:	Akonadi Contacts
 Name:		ka5-%{kaname}
@@ -13,7 +14,7 @@ Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
 # Source0-md5:	e4b501e5a6fedcb972b3ff2c31e8577a
 URL:		http://www.kde.org/
-BuildRequires:	Qt5Core-devel >= %{qtver}
+BuildRequires:	Qt5Core-devel >= %{qt_ver}
 BuildRequires:	Qt5Gui-devel >= 5.11.1
 BuildRequires:	Qt5Test-devel
 BuildRequires:	Qt5Widgets-devel
@@ -53,6 +54,10 @@ Summary:	Header files for %{kaname} development
 Summary(pl.UTF-8):	Pliki nagłówkowe dla programistów używających %{kpname}
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	Qt5Widgets-devel >= %{qt_ver}
+Requires:	ka5-akonadi-devel >= 5.24.5
+Requires:	ka5-grantleetheme-devel >= 5.24.5
+Requires:	kf5-kcontacts-devel >= 5.105.0
 
 %description devel
 Header files for %{kaname} development.
