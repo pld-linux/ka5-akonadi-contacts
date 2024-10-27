@@ -6,6 +6,7 @@
 %define		qt_ver		5.15.2
 %define		kaname		akonadi-contacts
 Summary:	Akonadi Contacts
+Summary(pl.UTF-8):	Komponent kontaktów dla Akonadi
 Name:		ka5-%{kaname}
 Version:	23.08.5
 Release:	1
@@ -13,7 +14,7 @@ License:	GPL v2+/LGPL v2.1+
 Group:		X11/Libraries
 Source0:	https://download.kde.org/stable/release-service/%{kdeappsver}/src/%{kaname}-%{version}.tar.xz
 # Source0-md5:	e4b501e5a6fedcb972b3ff2c31e8577a
-URL:		http://www.kde.org/
+URL:		https://kde.org/
 BuildRequires:	Qt5Core-devel >= %{qt_ver}
 BuildRequires:	Qt5Gui-devel >= 5.11.1
 BuildRequires:	Qt5Test-devel
@@ -49,6 +50,12 @@ domain-specific KContacts library. It provides jobs, models and other
 helpers to make working with contacts and addressbooks through Akonadi
 easier.
 
+%description -l pl.UTF-8
+Akonadi Contacts to biblioteka efektywnie łącząca niezależne od typów
+API bibliotek klienckich Akonadi oraz bibliotekę KContacts. Zapewnia
+funkcje pomocnicze dla zadań, modeli itp., ułatwiające pracę z
+kontaktami i książkami adresowymi poprzez Akonadi.
+
 %package devel
 Summary:	Header files for %{kaname} development
 Summary(pl.UTF-8):	Pliki nagłówkowe dla programistów używających %{kpname}
@@ -74,15 +81,16 @@ Pliki nagłówkowe dla programistów używających %{kaname}.
 	%{!?with_tests:-DBUILD_TESTING=OFF} \
 	-DHTML_INSTALL_DIR=%{_kdedocdir} \
 	-DKDE_INSTALL_USE_QT_SYS_PATHS=ON
+
 %ninja_build -C build
 
 %if %{with tests}
 ctest --test-dir build
 %endif
 
-
 %install
 rm -rf $RPM_BUILD_ROOT
+
 %ninja_install -C build
 
 %find_lang %{kaname} --all-name --with-kde
@@ -95,6 +103,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -f %{kaname}.lang
 %defattr(644,root,root,755)
+%ghost %{_libdir}/libKPim5AkonadiContact.so.5
+%attr(755,root,root) %{_libdir}/libKPim5AkonadiContact.so.*.*.*
+%ghost %{_libdir}/libKPim5ContactEditor.so.5
+%attr(755,root,root) %{_libdir}/libKPim5ContactEditor.so.*.*.*
 %attr(755,root,root) %{_libdir}/qt5/plugins/akonadi_serializer_addressee.so
 %attr(755,root,root) %{_libdir}/qt5/plugins/akonadi_serializer_contactgroup.so
 %{_datadir}/akonadi/plugins/serializer/akonadi_serializer_addressee.desktop
@@ -102,19 +114,15 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/kf5/akonadi/contact
 %{_datadir}/qlogging-categories5/akonadi-contacts.categories
 %{_datadir}/qlogging-categories5/akonadi-contacts.renamecategories
-%ghost %{_libdir}/libKPim5AkonadiContact.so.5
-%attr(755,root,root) %{_libdir}/libKPim5AkonadiContact.so.*.*.*
-%ghost %{_libdir}/libKPim5ContactEditor.so.5
-%attr(755,root,root) %{_libdir}/libKPim5ContactEditor.so.*.*.*
 
 %files devel
 %defattr(644,root,root,755)
-%{_libdir}/qt5/mkspecs/modules/qt_AkonadiContact.pri
-%{_libdir}/qt5/mkspecs/modules/qt_ContactEditor.pri
+%{_libdir}/libKPim5AkonadiContact.so
+%{_libdir}/libKPim5ContactEditor.so
 %{_includedir}/KPim5/AkonadiContact
 %{_includedir}/KPim5/AkonadiContactEditor
 %{_libdir}/cmake/KF5AkonadiContactEditor
 %{_libdir}/cmake/KPim5AkonadiContact
 %{_libdir}/cmake/KPim5ContactEditor
-%{_libdir}/libKPim5AkonadiContact.so
-%{_libdir}/libKPim5ContactEditor.so
+%{_libdir}/qt5/mkspecs/modules/qt_AkonadiContact.pri
+%{_libdir}/qt5/mkspecs/modules/qt_ContactEditor.pri
